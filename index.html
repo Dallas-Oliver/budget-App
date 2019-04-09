@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <h1 id="main-title">Budget App</h1>
+
+      <div id="budget-field">
+        <h2 id='budget-error-msg'></h2>
+        <h3 id="budget-title">Please Enter Your Budget</h3>
+        <form id='budget-input-form'>
+          <input type="text" id='budget-input-field' />
+          <input type="submit" value="Add Budget" />
+        </form>
+      </div>
+      <div id="expenses-name-main">
+          <h2 id='expenses-error-msg'></h2>
+        <h3 id="expenses-title">Please Enter Your Expense</h3>
+        <input type="text" id='expenses-name-field'  />
+        <h3 id="expenses-cost-field">Please Enter Expense Amount</h3>
+        <form id='expenses-input-form'>
+          <input type="text" id='expenses-input-field' />
+          <input type="submit" value="Add Expense" />
+        </form>
+      </div>
+      <div id='budget-display'>
+        <h2 id='budget-display-title'>Budget</h2>
+        <img alt='cash-icon' />
+        <h2 id='budget-display-amount'>$ 0</h2>
+      </div>
+      <div id='expenses-display'>
+          <h2 id='expenses-display-title'>Expenses</h2>
+          <img alt='card-icon' />
+          <h2 id='expenses-display-amount'>$ 0</h2>
+        </div>
+      </div>
+      <div id='balance-display'>
+          <h2 id='balance-display-title'>balance</h2>
+          <img alt='dollar-sign-icon' />
+          <h2 id='balance-display-amount'>$ 0</h2>
+        </div>
+      </div>
+      <div id='expenses-list'>
+        <table id='expense-table'>
+          <tr>
+            <th>Expense Name</th>
+            <th>Expense Cost</th>
+          </tr>
+          
+
+        </table>
+        
+      </div>
+    </div>
+
+    <script src="main.js" async defer></script>
+  </body>
+</html>
