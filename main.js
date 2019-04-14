@@ -6,16 +6,38 @@ const expensesCostInputField = document.getElementById("expenses-input-field");
 const budgetDisplayAmt = document.getElementById("budget-display-amount");
 const expensesDisplayAmt = document.getElementById("expenses-display-amount");
 const balanceDisplayAmt = document.getElementById("balance-display-amount");
-const expenseTable = document.getElementById("expense-table");
+const expenseTableNameContainer = document.getElementById("expense-table-name");
+const expenseTableCostContainer = document.getElementById("expense-table-cost");
+const expenseTableDeleteButtonContainer = document.getElementById(
+  "expense-table-delete-button"
+);
 const budgetErrorMessage = document.getElementById("budget-error-msg");
 const expenseErrorMessage = document.getElementById("expenses-error-msg");
 
 let budgetNumber = 0;
-let expenseNumber = 0;
-console.log(expensesCostInputField.value);
 let expenseRowNum = 0;
-let deleteButtonNum = 0;
 let expensesList = [0];
+let totalExpensesList;
+let totalBalance;
+
+function submitExpense(e) {
+  e.preventDefault();
+  expenseRowNum++;
+
+  if (expensesCostInputField.value !== "") {
+    expensesList.push(Number(expensesCostInputField.value));
+    totalExpensesList = expensesList.reduce((sum, current) => sum + current);
+
+    if (isNaN(expensesCostInputField.value)) {
+      displayError("expense");
+    } else {
+      expenseErrorMessage.innerHTML = "";
+      expensesDisplayAmt.innerHTML = "$ " + totalExpensesList;
+    }
+  }
+  displayBalance();
+  addExpenseToTable();
+}
 
 function submitBudget(e) {
   e.preventDefault();
@@ -27,53 +49,13 @@ function submitBudget(e) {
   } else {
     budgetErrorMessage.innerHTML = "";
     budgetDisplayAmt.innerHTML = "$ " + budgetNumber;
+    budgetInputField.value = "";
   }
   displayBalance();
 }
-
-function submitExpense(e) {
-  e.preventDefault();
-
-  if (expensesCostInputField.value !== "") {
-    expensesList.push(expensesCostInputField.value);
-  }
-  console.log(expensesList);
-
-  expenseRowNum++;
-  deleteButtonNum++;
-
-  if (isNaN(expenseNumber)) {
-    displayError("expense");
-    expensesDisplayAmt.innerHTML = "$0";
-  } else {
-    expenseErrorMessage.innerHTML = "";
-    expensesDisplayAmt.innerHTML = "$ " + expenseNumber;
-    addExpenseTableItem();
-  }
-  displayBalance();
-}
-
-function addExpenseTableItem() {
-  if (expensesNameField.value !== "") {
-    let expenseTableRow = expenseTable.insertRow(expenseRowNum);
-    let expenseNameData = expenseTableRow.insertCell(0);
-    let expenseCostData = expenseTableRow.insertCell(1);
-    let deleteExpenseButton = expenseTableRow.insertCell(2);
-    expenseNameData.innerHTML = expensesNameField.value;
-    expenseCostData.innerHTML = expensesCostInputField.value;
-    deleteExpenseButton.innerHTML = `<button id="delete-button ${deleteButtonNum} onclick="deleteExpense(${deleteButtonNum})">delete</button>`;
-  }
-}
-
-// deleteExpense(buttonNumber) {
-
-// }
 
 function displayBalance() {
-  // let totalBalance = Number(budgetNumber) - Number(expenseNumber);
-
-  let totalExpenses = expensesList.reduce((sum, current) => sum + current);
-  let totalBalance = Number(budgetNumber) - Number(totalExpenses);
+  totalBalance = Number(budgetNumber) - totalExpensesList;
 
   if (isNaN(totalBalance)) {
     balanceDisplayAmt.innerHTML = "$0";
@@ -90,6 +72,24 @@ function displayError(arg) {
   } else if (arg === "expense") {
     expenseErrorMessage.innerHTML = errorMessage;
   }
+}
+
+function addExpenseToTable() {
+  let newExpenseItemName = document.createElement("P");
+  newExpenseItemName.classList = `item-number-${expenseRowNum}`;
+  newExpenseItemName.innerHTML = expensesNameField.value;
+
+  let newExpenseItemCost = document.createElement("P");
+  newExpenseItemCost.classList = `item-number-${expenseRowNum}`;
+  newExpenseItemCost.innerHTML = expensesCostInputField.value;
+
+  let newExpenseDeleteButton = document.createElement("BUTTON");
+  newExpenseDeleteButton.classList = `item-number-${expenseRowNum}`;
+  newExpenseDeleteButton.innerHTML = "Delete Expense";
+
+  expenseTableNameContainer.appendChild(newExpenseItemName);
+  expenseTableCostContainer.appendChild(newExpenseItemCost);
+  expenseTableDeleteButtonContainer.appendChild(newExpenseDeleteButton);
 }
 
 budgetInputForm.addEventListener("submit", e => submitBudget(e));
