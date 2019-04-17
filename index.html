@@ -12,16 +12,21 @@
     <div class="container">
       <h1 id="main-title">Budget App</h1>
 
+      <div id="budget-error-msg">
+        <span>Please Enter a Valid Budget</span>
+      </div>
       <div id="budget-field">
-        <h2 id="budget-error-msg"></h2>
         <h3 id="budget-title">Please Enter Your Budget</h3>
         <form id="budget-input-form">
           <input type="text" id="budget-input-field" />
           <input type="submit" value="Add Budget" />
         </form>
       </div>
+
+      <div id="expenses-error-msg">
+        <span>Please Enter a Valid Expense</span>
+      </div>
       <div id="expenses-name-main">
-        <h2 id="expenses-error-msg"></h2>
         <h3 id="expenses-title">Please Enter Your Expense</h3>
         <input type="text" id="expenses-name-field" />
         <h3 id="expenses-cost-field">Please Enter Expense Amount</h3>
@@ -44,10 +49,18 @@
       <div id="balance-display">
         <h2 id="balance-display-title">balance</h2>
         <img src="dollar-sign.png" height="75" alt="dollar-sign-icon" />
-        <h2 id="balance-display-amount">$ 0</h2>
+
+        <h2>$ <span id="balance-display-amount">0</span></h2>
       </div>
 
-      <div id="expense-table-name">
+      <ul id="expenses-list-name">
+        <li class="expense-label" id="expenses-name-label">Expenses</li>
+      </ul>
+      <ul id="expenses-list-cost">
+        <li class="expense-label" id="expenses-cost-label">Cost</li>
+      </ul>
+
+      <!-- <div id="expense-table-name">
         <h3 id="expense-table-name-header">Expense Name</h3>
       </div>
       <div id="expense-table-cost">
@@ -55,7 +68,7 @@
       </div>
       <div id="expense-table-delete-button">
         <h3 id="delete-button-header">Delete Expenses</h3>
-      </div>
+      </div> -->
     </div>
 
     <script src="main.js" async defer></script>

@@ -33,6 +33,40 @@ body {
   text-align: center;
 }
 
+#budget-error-msg {
+  grid-column: 3 / span 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  visibility: hidden;
+
+  text-align: center;
+
+  padding: 10px 75px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  width: auto;
+  background-color: rgba(200, 20, 20, 0.1);
+  color: rgb(250, 20, 20);
+  font-weight: bold;
+}
+
+#expenses-error-msg {
+  grid-column: 3 / span 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  visibility: hidden;
+
+  text-align: center;
+
+  padding: 10px 75px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  width: auto;
+  background-color: rgba(200, 20, 20, 0.1);
+  color: rgb(250, 20, 20);
+  font-weight: bold;
+}
+
 #budget-field {
   grid-column: 1 / span 2;
   grid-row-start: 2;
@@ -105,29 +139,56 @@ body {
   grid-row-end: 2;
 }
 
-#expense-table-name {
+#balance-number {
+  display: inline;
+}
+
+#expenses-list-name {
   grid-column-start: 3;
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
+
+  list-style-type: none;
+  padding-left: 0px;
 }
 
-#expense-table-cost {
+#expenses-list-cost {
   grid-column-start: 4;
   grid-column-end: 4;
   grid-row-start: 3;
   grid-row-end: 3;
+
+  list-style-type: none;
+  padding-left: 0px;
 }
 
-#expense-table-delete-button {
-  grid-column-start: 5;
-  grid-column-end: 5;
+.expense-label {
+  font-weight: bold;
+  font-size: 26.4px;
+  padding: 0px;
+}
+
+#expenses-name-label {
+  grid-column-start: 3;
+  grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
 
-  margin: 0px;
+  list-style-type: none;
+  padding: 0px;
 }
 
-button.item-number {
-  margin: 17.6px 0px;
+#expenses-cost-label {
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 3;
+
+  list-style-type: none;
+  padding: 0px;
+}
+
+li {
+  padding: 5px 0px;
 }
