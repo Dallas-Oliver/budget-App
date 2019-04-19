@@ -13,30 +13,49 @@ const expenseErrorMessage = document.getElementById("expenses-error-msg");
 
 let budgetNumber = 0;
 let expenseRowNum = 0;
-let expensesList = [0];
+let expensesCostList = [0];
 let totalExpensesList;
 let totalBalance;
 
-localStorage.setItem("expenses", JSON.stringify(expensesList));
+function addLocalStorage() {
+  window.localStorage.setItem(
+    expensesNameField.value,
+    expensesCostInputField.value
+  );
+}
 
 function submitExpense(e) {
   e.preventDefault();
 
+  if (expensesNameField.value !== "" && expensesCostInputField.value !== "") {
+    addExpenseToTable(expensesNameField.value, expensesCostInputField.value);
+  } else {
+    displayError("expense");
+  }
+
+  changeBalanceColor();
+  addLocalStorage();
   expenseRowNum++;
 
-  if (expensesCostInputField.value !== "") {
-    expensesList.push(Number(expensesCostInputField.value));
-    localStorage.setItem("expenses", JSON.stringify(expensesList));
-    totalExpensesList = expensesList.reduce((sum, current) => sum + current);
+  if (expensesCostInputField.value !== "" && expensesNameField.value !== "") {
+    expensesCostList.push(Number(expensesCostInputField.value));
+
+    totalExpensesList = expensesCostList.reduce(
+      (sum, current) => sum + current
+    );
 
     if (isNaN(expensesCostInputField.value)) {
       displayError("expense");
     } else {
-      expensesDisplayAmt.innerHTML = "$ " + totalExpensesList;
+      expensesDisplayAmt.innerHTML = "$ " + totalExpensesList.toFixed(2);
+      expensesNameField.value = "";
+      expensesCostInputField.value = "";
     }
+  } else {
+    expensesNameField.value = "";
+    expensesCostInputField.value = "";
   }
   displayBalance();
-  addExpenseToTable(expensesNameField.value, expensesCostInputField.value);
   changeBalanceColor();
 }
 
@@ -47,7 +66,7 @@ function submitBudget(e) {
   if (isNaN(budgetNumber)) {
     displayError("budget");
   } else {
-    budgetDisplayAmt.innerHTML = "$ " + budgetNumber;
+    budgetDisplayAmt.innerHTML = "$ " + budgetNumber.toFixed(2);
     budgetInputField.value = "";
   }
   displayBalance();
@@ -61,12 +80,11 @@ function displayBalance() {
   if (isNaN(totalBalance)) {
     balanceDisplayAmt.innerHTML = "0";
   } else {
-    balanceDisplayAmt.innerHTML = totalBalance;
+    balanceDisplayAmt.innerHTML = totalBalance.toFixed(2);
   }
 }
 
 function changeBalanceColor() {
-  console.log(balanceDisplayAmt.innerHTML);
   if (Number(balanceDisplayAmt.innerHTML) <= 0) {
     balanceDisplayAmt.style.color = "red";
   } else {
@@ -99,16 +117,31 @@ function displayError(arg) {
   }
 }
 
+// function expenseTableInfo(nameOrCost, list, expenseValue) {
+//   nameOrCost = document.createElement("li");
+//   nameOrCost.textContent = expenseValue;
+//   nameOrCost.classList = "list-item" + expenseRowNum;
+//   list.appendChild(nameOrCost);
+// }
+
 function addExpenseToTable(expenseName, expenseCost) {
   const expense = document.createElement("li");
   expense.textContent = expenseName;
   expense.classList = "list-item" + expenseRowNum;
   expensesDisplayList.appendChild(expense);
 
-  expenseItemCost = document.createElement("li");
-  expenseItemCost.textContent = expenseCost;
+  const expenseItemCost = document.createElement("li");
+  expenseItemCost.textContent = "$ " + Number(expenseCost).toFixed(2);
   expenseItemCost.classList = "list-item" + expenseRowNum;
   expensescostDisplayList.appendChild(expenseItemCost);
+
+  // if (expensesCostInputField.value !== "") {
+  //   if (expenseName === expensesNameField.value) {
+  //     expenseTableInfo(expense, expensesDisplayList, expenseName);
+  //   } else if (expenseName === expensesCostInputField.value) {
+  //     expenseTableInfo(expenseItemCost, expensesCostDisplayList);
+  //   }
+  // }
 }
 
 budgetInputForm.addEventListener("submit", e => submitBudget(e));
