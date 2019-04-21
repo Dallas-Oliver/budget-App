@@ -15,11 +15,20 @@ body {
   font-size: 1.1rem;
 }
 
+#ultimate-container {
+  display: grid;
+  grid-template-columns: 200px 1000px;
+}
+
 .container {
   display: grid;
   grid-template-columns: 200px 200px 200px 200px 200px;
   grid-template-rows: 50px 225px 300px;
   text-align: center;
+  transition-property: filter;
+  transition-duration: 0.1s;
+
+  grid-column: 2;
 }
 
 #main-title {
@@ -199,4 +208,36 @@ body {
 
 li {
   padding: 5px 0px;
+}
+
+#popup-window {
+  position: relative;
+  top: 75px;
+  visibility: hidden;
+  grid-column: 1;
+  height: 470px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  transition-property: background;
+  transition-duration: 0.8s;
+}
+
+#menu-list {
+  position: relative;
+  top: 50px;
+  text-align: left;
+  font-weight: bold;
+  padding: 0px 20px;
+  list-style-type: none;
+  visibility: hidden;
+}
+
+#change-window {
+  position: absolute;
+  float: left;
+  grid-column: 1;
+  visibility: visible;
+  margin: 10px;
 }

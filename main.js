@@ -1,3 +1,4 @@
+const container = document.querySelector(".container");
 const budgetInputForm = document.getElementById("budget-input-form");
 const budgetInputField = document.getElementById("budget-input-field");
 const expensesNameField = document.getElementById("expenses-name-field");
@@ -11,11 +12,16 @@ const balanceDisplayAmt = document.getElementById("balance-display-amount");
 const budgetErrorMessage = document.getElementById("budget-error-msg");
 const expenseErrorMessage = document.getElementById("expenses-error-msg");
 
+const popupWindow = document.getElementById("popup-window");
+const popupButton = document.getElementById("change-window");
+const menuList = document.getElementById("menu-list");
+
 let budgetNumber = 0;
 let expenseRowNum = 0;
 let expensesCostList = [0];
 let totalExpensesList;
 let totalBalance;
+let changeView = false;
 
 function addLocalStorage() {
   window.localStorage.setItem(
@@ -78,7 +84,7 @@ function displayBalance() {
   changeBalanceColor();
 
   if (isNaN(totalBalance)) {
-    balanceDisplayAmt.innerHTML = "0";
+    return;
   } else {
     balanceDisplayAmt.innerHTML = totalBalance.toFixed(2);
   }
@@ -142,6 +148,24 @@ function addExpenseToTable(expenseName, expenseCost) {
   //     expenseTableInfo(expenseItemCost, expensesCostDisplayList);
   //   }
   // }
+}
+
+function displayMenu() {
+  if (changeView === false) {
+    popupWindow.style.visibility = "visible";
+    menuList.style.visibility = "visible";
+    container.style.filter = "blur(3px)";
+    changeView = true;
+  }
+}
+
+function hideMenu() {
+  if (changeView === true) {
+    popupWindow.style.visibility = "hidden";
+    menuList.style.visibility = "hidden";
+    container.style.filter = "none";
+    changeView = false;
+  }
 }
 
 budgetInputForm.addEventListener("submit", e => submitBudget(e));
