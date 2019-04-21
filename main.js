@@ -92,9 +92,9 @@ function displayBalance() {
 
 function changeBalanceColor() {
   if (Number(balanceDisplayAmt.innerHTML) <= 0) {
-    balanceDisplayAmt.style.color = "red";
+    balanceDisplayAmt.style.color = "#C02B23";
   } else {
-    balanceDisplayAmt.style.color = "green";
+    balanceDisplayAmt.style.color = "#4ce66a";
   }
 }
 
