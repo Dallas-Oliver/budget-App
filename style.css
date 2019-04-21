@@ -38,7 +38,7 @@ body {
   opacity: 1;
   display: grid;
   grid-template-columns: 200px 1000px;
-  background-color: #454441;
+  background-color: #4f5c51;
   padding: 75px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2px;
